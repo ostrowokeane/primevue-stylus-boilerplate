@@ -29,3 +29,16 @@ export function formatDate(datetime) {
   const res = date.toLocaleString("ru").slice(0, -3);
   return res;
 }
+
+export function parseQuery(queryString) {
+  var query = {};
+  var pairs = (queryString[0] === "?" ? queryString.substr(1) : queryString)
+    .replace(/\/$/, "")
+    .split("&");
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i].split("=");
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+  }
+  return query;
+}
+

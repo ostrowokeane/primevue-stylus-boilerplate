@@ -1,9 +1,10 @@
 import axios from "axios";
-import { getData } from "@/utils/get";
 import { cloneDeep } from "lodash";
-import parseQuery from "../../utils/parseQuery";
 import useToasts from "@/modules/useToasts";
-const { setToast } = useToasts();
+const { showToast } = useToasts();
+
+import { get } from "lodash";
+const getData = obj => get(obj, "data");
 
 const API_URL = process.env.VUE_APP_API_URL;
 
@@ -16,7 +17,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   response => {
     if (response.data.msg) {
-      setToast({
+      showToast({
         severity: "info",
         summary: response.data.msg,
         detail: response.data.msgDetail || "",
@@ -27,7 +28,7 @@ axiosInstance.interceptors.response.use(
   },
   error => {
     const { response } = error;
-    setToast({
+    showToast({
       severity: "error",
       summary: response?.data?.errorTitle || "Ошибка",
       detail: response?.data?.error || "Неизвестная ошибка на сервере",
@@ -86,9 +87,6 @@ class Http {
     const resultUrl = this._getUrl(url);
     const resultData = formDataConvert ? this._getFormData(data) : data;
     const resultConfig = cloneDeep(config);
-
-    const currentParams = parseQuery(location.search);
-    resultConfig.params = { ...params, ...currentParams };
 
     return {
       formDataConvert,
