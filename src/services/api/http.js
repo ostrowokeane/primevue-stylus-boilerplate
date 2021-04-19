@@ -87,7 +87,7 @@ class Http {
     const resultUrl = this._getUrl(url);
     const resultData = formDataConvert ? this._getFormData(data) : data;
     const resultConfig = cloneDeep(config);
-
+    resultConfig.params = params;
     return {
       formDataConvert,
       dataAbstraction,
