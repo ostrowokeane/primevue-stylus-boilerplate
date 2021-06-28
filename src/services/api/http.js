@@ -27,13 +27,16 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   error => {
+    // если надо на каждую ошибку выбрасывать toast, то раскомментировать код ниже
+    /* 
     const { response } = error;
     showToast({
       severity: "error",
-      summary: response?.data?.errorTitle || "Ошибка",
-      detail: response?.data?.error || "Неизвестная ошибка на сервере",
+      summary: response?.data?.error || "Ошибка",
+      detail: response?.data?.message || "Неизвестная ошибка на сервере",
       life: 5000
     });
+    */
     return Promise.reject(error);
   }
 );

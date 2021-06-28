@@ -13,9 +13,46 @@ function showToast(
   toastManager.emit("toast", { severity, summary, detail, life });
 }
 
+function showWarning({ title, body } = { title: null, body: null }) {
+  toastManager.emit("toast", {
+    severity: "warn",
+    summary: title,
+    detail: body,
+    life: 5000
+  });
+}
+function showSuccess({ title, body } = { title: null, body: null }) {
+  toastManager.emit("toast", {
+    severity: "success",
+    summary: title,
+    detail: body,
+    life: 5000
+  });
+}
+function showDanger({ title, body } = { title: null, body: null }) {
+  toastManager.emit("toast", {
+    severity: "error",
+    summary: title,
+    detail: body,
+    life: 5000
+  });
+}
+function toast(type = "error", title, body) {
+  toastManager.emit("toast", {
+    severity: type,
+    summary: title,
+    detail: body,
+    life: 5000
+  });
+}
+
 export default function useToasts() {
   return {
     toastManager,
-    showToast
+    showToast,
+    toast,
+    showWarning,
+    showDanger,
+    showSuccess
   };
 }

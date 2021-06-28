@@ -23,31 +23,3 @@ export default {
   }
 };
 </script>
-
-<style lang="stylus">
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--surface-b);
-  color: var(--text-color)
-  font-family: var(--font-family)
-  font-size: 12px
-}
-a {
-  color: var(--text-color)
-}
-.p-link {
-  color: var(--text-color)
-  text-decoration: none
-  font-weight: bold
-}
-.p-no-outline {
-  box-shadow: none !important
-}
-.w-auto {
-  width: auto !important
-}
-.w-100 {
-  width: 100% !important
-}
-</style>

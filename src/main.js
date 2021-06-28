@@ -1,9 +1,11 @@
-import "primevue/resources/themes/saga-blue/theme.css";
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
+// import "primevue/resources/themes/saga-blue/theme.css";
+// import "primevue/resources/primevue.min.css";
+// import "primeicons/primeicons.css";
 
 // import "./assets/_overrides.scss";
-import "primeflex/primeflex.min.css";
+// import "primeflex/primeflex.min.css";
+import "normalize.css/normalize.css";
+import "./assets/style/main.styl";
 
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -58,7 +60,7 @@ app.component("Checkbox", Checkbox);
 app.component("Toolbar", Toolbar);
 app.component("ConfirmDialog", ConfirmDialog);
 
-import bridge from "@vkontakte/vk-bridge";
-app.provide("bridge", bridge);
+// import bridge from "@vkontakte/vk-bridge";
+// app.provide("bridge", bridge);
 
 app.mount("#app");
