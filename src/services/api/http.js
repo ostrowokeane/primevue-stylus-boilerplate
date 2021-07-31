@@ -1,6 +1,7 @@
 import axios from "axios";
 import { cloneDeep } from "lodash";
 import useToasts from "@/modules/useToasts";
+import useUser from "@/modules/useUser";
 const { showToast } = useToasts();
 
 import { get } from "lodash";
@@ -35,7 +36,7 @@ axiosInstance.interceptors.response.use(
       summary: response?.data?.error || "Ошибка",
       detail: response?.data?.message || "Неизвестная ошибка на сервере",
       life: 5000
-    });
+    }); 
     */
     return Promise.reject(error);
   }
@@ -79,6 +80,7 @@ class Http {
 
   _getOptions(options) {
     const {
+      auth = false, // если true, то не использовать заголовок X-API-key
       formDataConvert = false, // конвертировать тело запроса в FormData перед отправкой (используется в случае наличия файла в теле)
       dataAbstraction = true, // извлекать и возвращать data из оъекта ответа с сервера
       data = {},
@@ -91,6 +93,14 @@ class Http {
     const resultData = formDataConvert ? this._getFormData(data) : data;
     const resultConfig = cloneDeep(config);
     resultConfig.params = params;
+
+    if (!auth) {
+      const { user } = useUser();
+      resultConfig.headers = {
+        ["X-API-Key"]: user.apiKey
+      };
+    }
+
     return {
       formDataConvert,
       dataAbstraction,

@@ -41,4 +41,14 @@ export function parseQuery(queryString) {
   }
   return query;
 }
-
+export function groupNumber(number, qnt = 3, char = " ") {
+  return `${number}`
+    .split("")
+    .reverse()
+    .join("")
+    .replace(new RegExp(`(\\d{${qnt}})`, "g"), `$1${char}`)
+    .split("")
+    .reverse()
+    .join("")
+    .trim();
+}

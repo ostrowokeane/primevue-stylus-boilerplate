@@ -1,1 +1,16 @@
 @import './mixins.styl';
+
+
+.loader {
+  absolute()
+  center()
+  background: alpha(#fff, .5)
+  backdrop-filter: blur(3px);
+  &__icon {
+    wh 40px;
+    border: 4px solid $;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: fa-spin 2s linear infinite;
+  }
+}
